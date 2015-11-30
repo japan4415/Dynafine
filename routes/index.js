@@ -12,4 +12,9 @@ router.get('/dynafine',function(req,res,next){
   res.render('testhtmls/test',{title:'render test'});
 });
 
+router.get('/test.css',function(req,res,next){
+  console.log(req+res);
+  res.send('testhtmls/test');
+});
+
 module.exports = router;
