@@ -6,8 +6,4 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/Dynafine',function(req,res,next){
-  res.render('test');
-});
-
 module.exports = router;

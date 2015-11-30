@@ -7,6 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/Dynafine',function(req,res,next){
+  console.log('チェックまでは遠てるで');
   res.render('test',{title:'render test'});
 });
 
