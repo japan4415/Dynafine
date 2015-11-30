@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/Dynafine',function(req,res,next){
-  res.send('test');
+  res.render('test');
 });
 
 module.exports = router;
