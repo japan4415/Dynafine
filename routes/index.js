@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/dynafine',function(req,res,next){
   console.log('チェックまでは遠てるで');
-  res.render('testhtmls/test',{title:'render test'});
+  res.render('test',{title:'render test'});
 });
 
 module.exports = router;
