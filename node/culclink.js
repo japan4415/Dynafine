@@ -36,6 +36,6 @@ Userag.aggregate([
   {$group:{_id:'$sitename',c:{$sum:1}}}
 ]).exec(function(err,result){
   mg.disconnect(function(err){
-    console.log(result);
+    console.log(result.length);
   });
 });
