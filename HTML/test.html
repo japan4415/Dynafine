@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Dynafine</title>
-    <link rel="stylesheet" type="text/css" href='stylesheets/test.css'>
-    <script src='js/test.js'></script>
+    <link rel="stylesheet" type="text/css" href='./test.css'>
+    <script src='./test.js'></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   </head>
   <body>
@@ -22,8 +22,40 @@ d3.select('body').selectAll('div')
     return d + "px";
   });
 
-var w = 800;
-var h = 800;
+/*
+var testquery = [
+  {
+    "id":0,
+    "sitename" : "腰痛の本当の原因って？",
+    "siteurl" : "http://1st.geocities.jp/frtatumi/",
+    "sitesnippet" : "今現在、腰痛でお悩みの方. 今まで色々な方法を試したけど あまり楽になっていない。 \nという方. それは、あなたの腰痛の. 原因が無くなっていないからです。 なぜ、あなたの\n腰痛の原因が無くならないか？というと. 一般的に 「コレが腰痛の原因」. といわれている\n ..."
+  }
+];
+
+var testnodes = [];
+for(i=0;i<=testquery.length;i++){
+  testnodes.push(testquery[i]);
+  testnodes[i].push({"id":i});
+}
+
+var testforce = d3.layout.force()
+  .nodes(testnodes)
+  .links(testlinks)
+  .size([w,h])
+  .linkStrength(0.1)
+  .friction(0.9)
+  .distance(300)
+  .charge(-30)
+  .gravity(0.1)
+  .theta(0.8)
+  .alpha(0.1)
+  .start();
+var links = [];
+
+*/
+
+var w = 1600,
+  h = 1600;
 var nodes = [
   {id:0,label:'test'},
   {id:1,label:'testes'},
@@ -33,8 +65,10 @@ var nodes = [
 var links = [
   {source:0, target:1},
   {source:0, target:2},
+  {source:0, target:3},
+  {source:1, target:2},
   {source:1, target:3},
-  {source:1, target:3}
+  {source:2,target:3}
 ];
 var force = d3.layout.force()
   .nodes(nodes)
@@ -44,7 +78,7 @@ var force = d3.layout.force()
   .friction(0.9)
   .distance(300)
   .charge(-30)
-  .gravity(0.2)
+  .gravity(0.05)
   .theta(0.8)
   .alpha(0.1)
   .start();
