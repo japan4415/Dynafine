@@ -35,7 +35,15 @@ mg.connect('mongodb://localhost/test');
 Userag.aggregate([
   {$group:{_id:'$sitename',c:{$sum:1}}}
 ]).exec(function(err,result){
-  mg.disconnect(function(err){
-    console.log(result.length);
+  var i = 0;
+  async.eachSeries(result,function(line){
+    User2.update({'sitename':line._id},{$set:{'siteid':i}},{upsert:false,multi:false},function(err){
+      i++;
+      next(null,err);
+    });
+  },function(err,results){
+    mg.disconnect(function(err){
+      console.log(err);
+    });
   });
 });
