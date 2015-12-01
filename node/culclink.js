@@ -33,16 +33,20 @@ var Userag = mg.model('Googleapiag');
 
 mg.connect('mongodb://localhost/test');
 
+console.log('変更を開始します。');
 Userag.aggregate([
   {$group:{_id:'$sitename',c:{$sum:1}}}
 ]).exec(function(err,result){
+  console.log('aggregate終了');
   var i = 0;
   async.eachSeries(result,function(line,next){
     User2.update({'sitename':line._id},{$set:{'siteid':i}},{upsert:false,multi:true},function(err){
+      console.log(i+'の書き換え完了'+err);
       i++;
       next(null,err);
     });
   },function(err,results){
+    console.log('最後まで行ったよ');
     mg.disconnect(function(err){
       console.log(err);
     });
