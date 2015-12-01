@@ -34,7 +34,7 @@ mg.connect('mongodb://localhost/test');
 
 Userag.aggregate([
   {$group:{_id:'$sitename',c:{$sum:1}}}
-]).exec(function(result){
+]).exec(function(err,result){
   mg.disconnect(function(err){
     console.log(result);
   });
