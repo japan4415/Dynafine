@@ -27,5 +27,3 @@ User2.aggregate([
 ]).exec(function(result){
   console.log(result);
 });
-
-});
