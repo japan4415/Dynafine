@@ -1,4 +1,5 @@
 mg = require('mongoose');
+async = require('async');
 
 var Schema = mg.Schema;
 var fstschema2 = new Schema({
