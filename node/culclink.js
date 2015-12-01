@@ -20,10 +20,22 @@ mg.model('Googleapi2',fstschema2);
 //mg.connect('mongodb://localhost/test');
 var User2 = mg.model('Googleapi2');
 
+//mongodb準備
+var agschema = new Schema({
+  _id:String,
+  c:Number,
+  result:String
+},{collection:'wordsapi'});
+mg.model('Googleapiag',agschema);
+//mg.connect('mongodb://localhost/test');
+var Userag = mg.model('Googleapiag');
+
 mg.connect('mongodb://localhost/test');
 
-User2.aggregate([
+Userag.aggregate([
   {$group:{_id:'$sitename',c:{$sum:1}}}
 ]).exec(function(result){
-  console.log(result);
+  mg.disconnect(function(err){
+    console.log(result);
+  });
 });
