@@ -37,7 +37,7 @@ Userag.aggregate([
   {$group:{_id:'$sitename',c:{$sum:1}}}
 ]).exec(function(err,result){
   var i = 0;
-  async.eachSeries(result,function(line){
+  async.eachSeries(result,function(line,next){
     User2.update({'sitename':line._id},{$set:{'siteid':i}},{upsert:false,multi:false},function(err){
       i++;
       next(null,err);
