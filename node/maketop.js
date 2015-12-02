@@ -80,7 +80,7 @@ async.waterfall([
       }
     ],function(err,results){
         User2.update({siteID:line._id},{$set:{kanren:[results[0]._id,results[1]._id,results[2]._id,results[3]._id,results[4]._id,]}},{upsert:false,multi:true},function(){
-          mg.disconnect(console.log('完了しました'););
+          mg.disconnect(function({console.log('完了しました');});
         });
       });
     });
