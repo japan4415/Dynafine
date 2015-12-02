@@ -39,7 +39,7 @@ console.log('処理を開始します');
 async.waterfall([
   /* siteIDの数を数え上げ */
   function(next){
-    idlist = [0,1,2,3,4,5,6,7,8,9,10];
+    idlist = ['0','1','2','3','4','5','6','7','8','9','10'];
     next(null,idlist);
   },
   /* ここからそれぞれに分岐 */
