@@ -39,8 +39,8 @@ console.log('処理を開始します');
 async.waterfall([
   /* siteIDの数を数え上げ */
   function(next){
-    Userag.aggregate([{$group:{_id:'$siteID',c:{$sum:1}}}]).exec(function(result){
-      console.log('siteIDの数は' + result);
+    Userag.aggregate([{$group:{_id:'$siteID',c:{$sum:1}}}]).exec(function(err,result){
+      console.log('siteIDの数は' + result.length);
       next(null,result);
     });
   },
