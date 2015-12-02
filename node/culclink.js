@@ -35,14 +35,14 @@ mg.connect('mongodb://localhost/test');
 
 console.log('変更を開始します。');
 Userag.aggregate([
-  {$group:{_id:'$sitename',c:{$sum:1}}}
+  {$group:{_id:'$sitename',c:{$sum:1}}
 ]).exec(function(err,result){
   console.log('aggregate終了');
   var i = 0;
   async.eachSeries(result,function(line,next){
     console.log(line._id+'を書き換えるよ');
     User2.update({'sitename':line._id},{$set:{'siteID':i}},{upsert:false,multi:true},function(err){
-      console.log(i + line._id +'の書き換え完了'+err);
+      console.log(i + 'の書き換え完了'+err);
       i++;
       next(null,err);
     });
