@@ -63,8 +63,7 @@ async.waterfall([
             {$sort:{c:-1}},
             {$limit:5}
           ]).exec(function(err,res2){
-            console.log(res2);
-            console.log(err);
+            console.log('関連のあるワード' + res2);
             User2.update({$or:[{'words.hyoso':res2[0]._id},{'words.hyoso':res2[1]._id},{'words.hyoso':res2[2]._id},{'words.hyoso':res2[3]._id},{'words.hyoso':res2[4]._id}]},{$set:{'flag':1}},{upsert:false,multi:true},function(errrrrr){
               next2(null,null);
             });
@@ -81,15 +80,15 @@ async.waterfall([
           });
       }
     ],function(err,results){
-        User2.update({siteID:line._id},{$set:{kanren:[results[0]._id,results[1]._id,results[2]._id,results[3]._id,results[4]._id,]}},{upsert:false,multi:true},function(){
-          nextline(null,line._id);
-        });
+      console.log('top5は' + results[0]._id + results[1]._id + results[2]._id + results[3]._id + results[4]._id);
+      User2.update({siteID:line._id},{$set:{kanren:[results[0]._id,results[1]._id,results[2]._id,results[3]._id,results[4]._id,]}},{upsert:false,multi:true},function(){
+        nextline(null,line._id);
       });
-    },function(err,result){
-      next(err,result);
     });
-  }
-],function(err,result){
+  },function(err,result){
+    next(err,result);
+  });
+}],function(err,result){
   console.log(result + 'について書き換えが完了');
   mg.disconnect();
 });

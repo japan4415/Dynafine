@@ -42,7 +42,7 @@ Userag.aggregate([
   async.eachSeries(result,function(line,next){
     console.log(line._id+'を書き換えるよ');
     User2.update({'sitename':line._id},{$set:{'siteID':i}},{upsert:false,multi:true},function(err){
-      console.log(i+'の書き換え完了'+err);
+      console.log(i + line._id +'の書き換え完了'+err);
       i++;
       next(null,err);
     });
