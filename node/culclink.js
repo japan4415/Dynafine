@@ -48,8 +48,7 @@ Userag.aggregate([
     });
   },function(err,results){
     console.log('最後まで行ったよ');
-    mg.disconnect(function(err){
-      console.log(err);
+    mg.disconnect(function(){
     });
   });
 });

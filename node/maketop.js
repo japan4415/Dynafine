@@ -63,7 +63,7 @@ async.waterfall([
             {$sort:{c:-1}},
             {$limit:5}
           ]).exec(function(err,res2){
-            console.log('関連のあるワード' + res2);
+            console.log(res2[0]._id + res2[1]._id + res2[2]._id + res2[3]._id + res2[4]._id);
             User2.update({$or:[{'words.hyoso':res2[0]._id},{'words.hyoso':res2[1]._id},{'words.hyoso':res2[2]._id},{'words.hyoso':res2[3]._id},{'words.hyoso':res2[4]._id}]},{$set:{'flag':1}},{upsert:false,multi:true},function(errrrrr){
               next2(null,null);
             });
