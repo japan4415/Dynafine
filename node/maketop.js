@@ -61,7 +61,7 @@ async.waterfall([
         function(result,next2){
           //console.log(siteurlurl);
           User2.aggregate([
-            {$match:{'siteID':line._id,'words.kaisu':{$gt:1}}},
+            {$match:{'siteID':line._id}},
             {$group:{_id:'$words.hyoso',c:{$sum:'$words.tfidf'}}},
             {$sort:{c:-1}},
             {$limit:5}
