@@ -35,7 +35,7 @@ mg.connect('mongodb://localhost/test');
 
 console.log('変更を開始します。');
 Userag.aggregate([
-  {$group:{_id:'$sitename',c:{$sum:1}}
+  {$group:{_id:'$sitename',c:{$sum:1}}}
 ]).exec(function(err,result){
   console.log('aggregate終了');
   var i = 0;
