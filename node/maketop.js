@@ -35,17 +35,19 @@ var Userag = mg.model('Googleapiag');
 mg.connect('mongodb://localhost/test');
 
 
-
+console.log('処理を開始します');
 async.waterfall([
   /* siteIDの数を数え上げ */
   function(next){
-    Userag.agggregate([{$group:{_id:'$siteID',c:{$sum:1}}}]).exec(function(result){
+    Userag.aggregate([{$group:{_id:'$siteID',c:{$sum:1}}}]).exec(function(result){
+      console.log('siteIDの数は' + result);
       next(null,result);
     });
   },
   /* ここからそれぞれに分岐 */
   function(result,next){
     async.eachSeries(result,function(line,nextline){
+      console.log('これから' + line._id + 'を見ていくよ');
       async.waterfall([
         function(next2){
           User2.update({},{$set:{flag:0}},{upsert:false,multi:true},function(err){
@@ -80,11 +82,14 @@ async.waterfall([
       }
     ],function(err,results){
         User2.update({siteID:line._id},{$set:{kanren:[results[0]._id,results[1]._id,results[2]._id,results[3]._id,results[4]._id,]}},{upsert:false,multi:true},function(){
-          mg.disconnect(function(){
-            console.log('完了しました');
-          });
+          nextline(null,line._id);
         });
       });
+    },function(err,result){
+      next(err,result);
     });
   }
-]);
+],function(err,result){
+  console.log(result + 'について書き換えが完了');
+  mg.disconnect();
+});
